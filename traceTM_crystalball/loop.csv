@@ -1,0 +1,11 @@
+loop
+q0,q1,qacc,qrej
+a
+a,_
+q0,
+qacc,
+qrej,
+q0,_,q1,_,R
+q0,a,q1,a,R
+q1,_,q0,_,L
+q1,a,q0,a,L
