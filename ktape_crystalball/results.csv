@@ -1,0 +1,13 @@
+Machine Name,Tapes,Input String,Result,Final State,Transitions
+flip.csv,aa_,1,bb_,qaccept,3
+flip.csv,aabb_,1,bbaa_,qaccept,5
+flip.csv,bb_,1,aa_,qaccept,3
+flip.csv,bbaa_,1,aabb_,qaccept,5
+right.csv,"aa_, ____",2,"aa_, $aa_",qaccept,4
+right.csv,"aabb_, ______",2,"aabb_, $aabb_",qaccept,6
+right.csv,"bb_, ____",2,"bb_, $bb_",qaccept,4
+right.csv,"bbaa_, ______",2,"bbaa_, $bbaa_",qaccept,6
+multiple1.csv,"aa_, ___, ____",3,"aa_, bb_, $aa_",qaccept,4
+multiple1.csv,"aabb_, _____, ______",3,"aabb_, bbaa_, $aabb_",qaccept,6
+multiple1.csv,"bb_, ___, ____",3,"bb_, aa_, $bb_",qaccept,4
+multiple1.csv,"bbaa_, _____, ______",3,"bbaa_, aabb_, $bbaa_",qaccept,6

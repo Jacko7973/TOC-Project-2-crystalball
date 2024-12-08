@@ -1,0 +1,10 @@
+flip
+q1,qaccept,qreject
+a,b
+a,b,_
+q1
+qaccept
+qreject
+q1,a,q1,b,R
+q1,b,q1,a,R
+q1,_,qaccept,_,R
