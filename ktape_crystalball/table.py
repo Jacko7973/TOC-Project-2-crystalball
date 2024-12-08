@@ -49,7 +49,7 @@ def run_all(output_filename:str):
     for i, testcase in enumerate(TESTS, 1):
         result = run_test(testcase)
         if result:
-            record = (testcase[0], ', '.join(testcase[1]), result[1], ', '.join(result[3]), result[4], result[5])
+            record = (result[0], ', '.join(testcase[1]), result[1], ', '.join(result[3]), result[4], result[5])
             records.append(record)
 
     with open(output_filename, "w") as f:
