@@ -3,6 +3,7 @@
 import csv
 from ktape_crystalball import *
 
+# test cases
 TESTS = (
     ("data_flip_crystalball.csv", ["aa_"], ["bb_"]),
     ("data_flip_crystalball.csv", ["aabb_"], ["bbaa_"]),
@@ -20,8 +21,10 @@ TESTS = (
     ("data_multiple1_crystalball.csv", ["bbaa_", "_____", "______"], ["bbaa_", "aabb_", "$bbaa_"]),
 )
 
+# headers for the output result csv
 HEADERS = ("Machine Name", "Tapes", "Input String", "Result", "Final State", "Transitions")
 
+# run the individual test case
 def run_test(testcase:tuple) -> tuple:
     machine_file, input_strings, output_strings = testcase
 
@@ -29,10 +32,12 @@ def run_test(testcase:tuple) -> tuple:
     
     termination_flag = int(sys.argv[len(sys.argv) - 1]) if len(sys.argv) > 3 else None
 
+    # process the machine file
     name, tape, states, sigma, gamma, start, accept, reject, transitions = process_csv(machine_file)
 
     index = [0] * tape
     
+    # process the transitions
     current, num_transitions = process_transitions(tape, transitions, start, accept, index, tapes, verbose=False)
 
     result = [''.join(sublist) for sublist in tapes]
@@ -41,6 +46,7 @@ def run_test(testcase:tuple) -> tuple:
 
     return (name, tape, input_strings, result, current, num_transitions)
 
+# run all the test cases
 def run_all(output_filename:str):
     if not output_filename.endswith(".csv"):
         output_filename = output_filename + ".csv"
@@ -52,6 +58,7 @@ def run_all(output_filename:str):
             record = (result[0], ', '.join(testcase[1]), result[1], ', '.join(result[3]), result[4], result[5])
             records.append(record)
 
+    # write the output result to a csv file
     with open(output_filename, "w") as f:
         writer = csv.writer(f, delimiter=",")
         writer.writerow(HEADERS)

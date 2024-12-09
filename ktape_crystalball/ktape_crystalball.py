@@ -3,6 +3,7 @@
 import csv
 import sys
 
+# load the TM by parsing the machine file
 def process_csv(filename):
     # Local variables for the data
     name = None
@@ -35,11 +36,11 @@ def process_csv(filename):
     
     return name, tape, states, sigma, gamma, start, accept, reject, transitions
 
-
+# process the transitions (check for state and old characters)
 def process_transitions(tape, transitions, start, accept, index, tapes, verbose=True):
-    old = []
-    new = []
-    moves = []
+    old = [] # list of old characters
+    new = [] # list of new characters
+    moves = [] # list of moves
     current = start
     num_transitions = 0
     step = 1
@@ -65,11 +66,14 @@ def process_transitions(tape, transitions, start, accept, index, tapes, verbose=
         for move in range(2 + 2 * tape, 2 + 3 * tape):
             moves.append(transition[move])
 
+        # check if moving the head is valid
         if bool_move(state, current, old, tapes, index, accept):
             num_transitions += 1
             current = new_state
 
+            # replace old characters with new characters
             replace_characters(old, new, tapes, index)
+            # move the head (either left, right, or stay)
             move_tape(moves, index)
     
             verbose and print()
@@ -86,9 +90,9 @@ def process_transitions(tape, transitions, start, accept, index, tapes, verbose=
         else:
             i += 1
 
-        old = []
-        new = []
-        moves = [] 
+        old = [] # reset the list of old characters
+        new = [] # reset the list of new characters
+        moves = [] # reset the list of moves
 
     return current, num_transitions
 
@@ -140,6 +144,7 @@ def main():
     
     termination_flag = int(sys.argv[len(sys.argv) - 1]) if len(sys.argv) > 3 else None
 
+    # process the machine file
     name, tape, states, sigma, gamma, start, accept, reject, transitions = process_csv(machine_file)
 
     print(f"Machine name: {name}")
@@ -153,6 +158,8 @@ def main():
     print()
 
     index = [0] * tape
+
+    # process the transitions
     current, num_transitions = process_transitions(tape, transitions, start, accept, index, tapes)
 
     output_strings = []
