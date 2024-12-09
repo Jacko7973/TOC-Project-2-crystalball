@@ -4,20 +4,20 @@ import csv
 from ktape_crystalball import *
 
 TESTS = (
-    ("flip.csv", ["aa_"], ["bb_"]),
-    ("flip.csv", ["aabb_"], ["bbaa_"]),
-    ("flip.csv", ["bb_"], ["aa_"]),
-    ("flip.csv", ["bbaa_"], ["aabb_"]),
+    ("data_flip_crystalball.csv", ["aa_"], ["bb_"]),
+    ("data_flip_crystalball.csv", ["aabb_"], ["bbaa_"]),
+    ("data_flip_crystalball.csv", ["bb_"], ["aa_"]),
+    ("data_flip_crystalball.csv", ["bbaa_"], ["aabb_"]),
 
-    ("right.csv", ["aa_", "____"], ["aa_", "$aa_"]),
-    ("right.csv", ["aabb_", "______"], ["aabb_", "$aabb_"]),
-    ("right.csv", ["bb_", "____"], ["bb_", "$bb_"]),
-    ("right.csv", ["bbaa_", "______"], ["bbaa_", "$bbaa_"]),
+    ("data_right_crystalball.csv", ["aa_", "____"], ["aa_", "$aa_"]),
+    ("data_right_crystalball.csv", ["aabb_", "______"], ["aabb_", "$aabb_"]),
+    ("data_right_crystalball.csv", ["bb_", "____"], ["bb_", "$bb_"]),
+    ("data_right_crystalball.csv", ["bbaa_", "______"], ["bbaa_", "$bbaa_"]),
 
-    ("multiple1.csv", ["aa_", "___", "____"], ["aa_", "bb_", "$aa_"]),
-    ("multiple1.csv", ["aabb_", "_____", "______"], ["aabb_", "bbaa_", "$aabb_"]),
-    ("multiple1.csv", ["bb_", "___", "____"], ["bb_", "aa_", "$bb_"]),
-    ("multiple1.csv", ["bbaa_", "_____", "______"], ["bbaa_", "aabb_", "$bbaa_"]),
+    ("data_multiple1_crystalball.csv", ["aa_", "___", "____"], ["aa_", "bb_", "$aa_"]),
+    ("data_multiple1_crystalball.csv", ["aabb_", "_____", "______"], ["aabb_", "bbaa_", "$aabb_"]),
+    ("data_multiple1_crystalball.csv", ["bb_", "___", "____"], ["bb_", "aa_", "$bb_"]),
+    ("data_multiple1_crystalball.csv", ["bbaa_", "_____", "______"], ["bbaa_", "aabb_", "$bbaa_"]),
 )
 
 HEADERS = ("Machine Name", "Tapes", "Input String", "Result", "Final State", "Transitions")
@@ -63,4 +63,4 @@ def run_all(output_filename:str):
 
     
 if __name__ == "__main__":
-    run_all("results.csv")
+    run_all("output_result_crystalball.csv")
