@@ -1,0 +1,12 @@
+flip and right shift,3
+q1,q2,qaccept,qreject
+a,b
+a,b,_
+q1
+qaccept
+qreject
+q1,a,_,_,q2,a,_,$,S,S,R
+q1,b,_,_,q2,b,_,$,S,S,R
+q2,a,_,_,q2,a,b,a,R,R,R
+q2,b,_,_,q2,b,a,b,R,R,R
+q2,_,_,_,qaccept,_,_,_,R,R,R

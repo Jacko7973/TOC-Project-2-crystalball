@@ -1,0 +1,11 @@
+left shift,2
+q1,q2,qaccept,qreject
+$,a,b
+$,a,b,_
+q1
+qaccept
+qreject
+q1,$,_,q2,$,_,R,S
+q2,a,_,q2,a,a,R,R
+q2,b,_,q2,b,b,R,R
+q2,_,_,qaccept,_,_,R,R

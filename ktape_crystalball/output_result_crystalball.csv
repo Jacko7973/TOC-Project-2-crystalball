@@ -1,0 +1,13 @@
+Machine Name,Tapes,Input String,Result,Final State,Transitions
+flip,aa_,1,bb_,qaccept,3
+flip,aabb_,1,bbaa_,qaccept,5
+flip,bb_,1,aa_,qaccept,3
+flip,bbaa_,1,aabb_,qaccept,5
+right shift,"aa_, ____",2,"aa_, $aa_",qaccept,4
+right shift,"aabb_, ______",2,"aabb_, $aabb_",qaccept,6
+right shift,"bb_, ____",2,"bb_, $bb_",qaccept,4
+right shift,"bbaa_, ______",2,"bbaa_, $bbaa_",qaccept,6
+flip and right shift,"aa_, ___, ____",3,"aa_, bb_, $aa_",qaccept,4
+flip and right shift,"aabb_, _____, ______",3,"aabb_, bbaa_, $aabb_",qaccept,6
+flip and right shift,"bb_, ___, ____",3,"bb_, aa_, $bb_",qaccept,4
+flip and right shift,"bbaa_, _____, ______",3,"bbaa_, aabb_, $bbaa_",qaccept,6
