@@ -25,6 +25,7 @@ TuringMachineResult = namedtuple("TuringMachineResult", ["status", "depth", "tra
 ### Functions
 
 def load_TM(path:str) -> TuringMachine:
+    # Load the turing machine from a CSV file
     try:
         with open(path, "r") as f:
             reader = csv.reader(f, delimiter=",")
@@ -40,6 +41,7 @@ def load_TM(path:str) -> TuringMachine:
             for transition in reader:
                 delta.append(TuringMachineTransition(*transition))
 
+            # Create the TuringMachine object
             return TuringMachine(
                 name=name,
                 q=q,
@@ -58,7 +60,7 @@ def load_TM(path:str) -> TuringMachine:
 
 
 def perform_transition(step:TuringMachineStep) -> list[TuringMachineStep]:
-
+    # Single iteration of a transition on a turing machine
     outputs = []
     current_tape_char = step.tape_right[0] if len(step.tape_right) else "_"
 
@@ -69,6 +71,7 @@ def perform_transition(step:TuringMachineStep) -> list[TuringMachineStep]:
         new_tape_left = step.tape_left
         new_tape_right = step.tape_right
 
+        # Update the tapes based on the transition instructions
         if transition.tape_direction == "R":
             new_tape_left = new_tape_left + write_char
             new_tape_right = new_tape_right[1:] if len(new_tape_right) else ""
@@ -79,6 +82,7 @@ def perform_transition(step:TuringMachineStep) -> list[TuringMachineStep]:
         new_step = TuringMachineStep(step.tm, new_tape_left, transition.next_state, new_tape_right, step.depth + 1)
         outputs.append(new_step)
 
+    # If a transition doesnt exist, transition to reject state
     if not outputs:
         outputs.append(TuringMachineStep(step.tm, step.tape_left, step.tm.qrej, step.tape_right, step.depth + 1))
 
@@ -86,15 +90,17 @@ def perform_transition(step:TuringMachineStep) -> list[TuringMachineStep]:
 
 
 def step_to_tuple(step:TuringMachineStep) -> tuple:
+    # Format a step into a readable tuple
     return (step.tape_left, step.state, step.tape_right)
 
 
 def init_TM(tm:TuringMachine, input:str) -> TuringMachineStep:
+    # Setup turing machine on input string to begin simulating
     return TuringMachineStep(tm, "_", tm.q0, input + "_", 1)
 
 
 def trace_TM(step:TuringMachineStep, depth_cap:int=1000, verbose:bool=True) -> TuringMachineResult:
-
+    # Trace the steps of an NTM
     dq = deque([(step, None)])
     seen = {}
     options_counts = []
@@ -107,6 +113,7 @@ def trace_TM(step:TuringMachineStep, depth_cap:int=1000, verbose:bool=True) -> T
 
         s, prev = dq.popleft()
 
+        # Don't processes repeat steps
         if s in seen:
             continue
         seen[s] = prev
@@ -116,6 +123,7 @@ def trace_TM(step:TuringMachineStep, depth_cap:int=1000, verbose:bool=True) -> T
         if s.depth >= depth_cap:
             continue
 
+        # Exit search if accept state found
         if s.state == s.tm.qacc:
             status = TM_Status.ACCEPTED
             break
@@ -125,6 +133,7 @@ def trace_TM(step:TuringMachineStep, depth_cap:int=1000, verbose:bool=True) -> T
 
         new_steps = perform_transition(s)
         options_counts.append(len(new_steps))
+
         for st in new_steps:
             dq.append((st, s))
 
@@ -156,6 +165,7 @@ def trace_TM(step:TuringMachineStep, depth_cap:int=1000, verbose:bool=True) -> T
             status = TM_Status.TIMEDOUT
             verbose and print(f"Execution stopped after {transitions} transitions.")
 
+    # Return the information about the search
     return TuringMachineResult(
         status=status,
         depth=max_depth,

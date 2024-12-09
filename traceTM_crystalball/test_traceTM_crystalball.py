@@ -37,13 +37,16 @@ HEADERS = ("Machine Name", "Input String", "Result", "Max Depth", "# Transitions
 
 
 def test_individual(testcase:tuple) -> tuple:
+    # Run an individual test case
 
     path, string, expected = testcase
 
+    # Set up and run the NTM using the specified input string
     tm = load_TM(path)
     start_state = init_TM(tm, string)
     result = trace_TM(start_state, verbose=False)
 
+    # Make sure the test outputs the expected value
     assert result.status == expected
 
     return result
@@ -51,6 +54,7 @@ def test_individual(testcase:tuple) -> tuple:
 
 
 def test_all(output_filename:str):
+    # Run all test cases in the TESTS list and write them to outputfile
 
     if not output_filename.endswith(".csv"):
         output_filename = output_filename + ".csv"
@@ -65,6 +69,7 @@ def test_all(output_filename:str):
             print(f"[INFO] Test Failed... (test={i})")
             return
 
+    # Write the records to the output file
     with open(output_filename, "w") as f:
         writer = csv.writer(f, delimiter=",")
         writer.writerow(HEADERS)

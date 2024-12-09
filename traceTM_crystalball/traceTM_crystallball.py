@@ -18,13 +18,16 @@ def main():
     parser.add_argument("string", help="Input string to Turing Machine")
     parser.add_argument("--max-depth", type=int, default=1000, required=False, help="Maximum search tree depth (default=1000)")
 
+    # Parse command line arguments
     args = parser.parse_args(sys.argv[1:])
 
+    # Set up and display information about machine
     tm = load_TM(args.file)
     print(f"Machine name: '{tm.name}'")
     print(f"Input string: '{args.string}'")
     print(f"{' Running ':=^40}")
 
+    # Run the simulation in verbose mode
     start_step = init_TM(tm, args.string)
     trace_TM(start_step, args.max_depth)
 
