@@ -11,7 +11,7 @@ class TM_Status(Enum):
     UNKNOWN = "Unknown"
     ACCEPTED = "Accpeted"
     REJECTED = "Rejected"
-    HAULTED = "Haulted"
+    TIMEDOUT = "Timed Out"
 
 
 ### Type Declarations
@@ -153,7 +153,7 @@ def trace_TM(step:TuringMachineStep, depth_cap:int=1000, verbose:bool=True) -> T
             verbose and print(f"String rejected in {transitions} transitions.")
         else:
             # Simulation reached maximum depth
-            status = TM_Status.HAULTED
+            status = TM_Status.TIMEDOUT
             verbose and print(f"Execution stopped after {transitions} transitions.")
 
     return TuringMachineResult(

@@ -11,22 +11,26 @@ from TM_utils_crystalball import TuringMachine, TuringMachineResult, TM_Status, 
 ### Constants
 
 TESTS = (
-    ("aplus.csv", "aaaaa", TM_Status.ACCEPTED),
-    ("aplus.csv", "aaaab", TM_Status.REJECTED),
-    ("aplus.csv", "aaaaaaaaaaaaaaaaaa", TM_Status.ACCEPTED),
-    ("aplus.csv", "baa", TM_Status.REJECTED),
-    ("aplus.csv", "a", TM_Status.ACCEPTED),
-    ("aplus.csv", "aaacaa", TM_Status.REJECTED),
+    ("data_aplus_crystalball.csv", "aaaaa", TM_Status.ACCEPTED),
+    ("data_aplus_crystalball.csv", "aaaab", TM_Status.REJECTED),
+    ("data_aplus_crystalball.csv", "aaaaaaaaaaaaaaaaaa", TM_Status.ACCEPTED),
+    ("data_aplus_crystalball.csv", "baa", TM_Status.REJECTED),
+    ("data_aplus_crystalball.csv", "a", TM_Status.ACCEPTED),
+    ("data_aplus_crystalball.csv", "aaacaa", TM_Status.REJECTED),
 
-    ("equal_01s_DTM.csv", "01", TM_Status.ACCEPTED),
-    ("equal_01s_DTM.csv", "1010", TM_Status.ACCEPTED),
-    ("equal_01s_DTM.csv", "10101", TM_Status.REJECTED),
-    ("equal_01s_DTM.csv", "11111111110000000000", TM_Status.ACCEPTED),
+    ("data_equal_01s_DTM_crystalball.csv", "01", TM_Status.ACCEPTED),
+    ("data_equal_01s_DTM_crystalball.csv", "1010", TM_Status.ACCEPTED),
+    ("data_equal_01s_DTM_crystalball.csv", "10101", TM_Status.REJECTED),
+    ("data_equal_01s_DTM_crystalball.csv", "11111111110000000000", TM_Status.ACCEPTED),
 
-    ("equal_01s.csv", "01", TM_Status.ACCEPTED),
-    ("equal_01s.csv", "1010", TM_Status.ACCEPTED),
-    ("equal_01s.csv", "10101", TM_Status.REJECTED),
-    ("equal_01s.csv", "11111111110000000000", TM_Status.ACCEPTED),
+    ("data_equal_01s_crystalball.csv", "01", TM_Status.ACCEPTED),
+    ("data_equal_01s_crystalball.csv", "1010", TM_Status.ACCEPTED),
+    ("data_equal_01s_crystalball.csv", "10101", TM_Status.REJECTED),
+    ("data_equal_01s_crystalball.csv", "11111111110000000000", TM_Status.ACCEPTED),
+
+    ("data_loop_crystalball.csv", "", TM_Status.TIMEDOUT),
+    ("data_loop_crystalball.csv", "a", TM_Status.TIMEDOUT),
+    ("data_loop_crystalball.csv", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", TM_Status.TIMEDOUT),
 )
 
 HEADERS = ("Machine Name", "Input String", "Result", "Max Depth", "# Transitions", "Average Nondeterminism", "Comments")
@@ -60,16 +64,17 @@ def test_all(output_filename:str):
         except AssertionError:
             print(f"[INFO] Test Failed... (test={i})")
             return
-        
+
     with open(output_filename, "w") as f:
         writer = csv.writer(f, delimiter=",")
         writer.writerow(HEADERS)
         for record in records:
             writer.writerow(record)
-    
+
     print("[INFO] Status... success")
     print(f"[INFO] Output written to {output_filename}")
 
 
 if __name__ == "__main__":
-    test_all("results.csv")
+    test_all("output_results_crystalball.csv")
+
