@@ -1,0 +1,4 @@
+Two-Stack TM,aaa,q_accept,4,4,1
+Two-Stack TM,a,q_accept,2,2,1
+Two-Stack TM,aaaaaa,q_accept,7,7,1
+Two-Stack TM,aaa,q_accept,4,4,1
